@@ -2,11 +2,12 @@
 
 const Cart = (props) => {
     const cartItems= props.cartState;
-    let cartPrice=0;
-    for(let i=0; i<cartItems.length; i++){
-        let perProduct=cartItems[i].price;
-        cartPrice+=perProduct;
-    }
+    // let cartPrice=0;
+    // for(let i=0; i<cartItems.length; i++){
+    //     let perProduct=cartItems[i].price;
+    //     cartPrice+=perProduct;
+    // }
+    const cartPrice= cartItems.reduce((cartPrice, perProduct) => cartPrice+perProduct.price, 0)
 
 let shipping= 0;
 if(cartPrice>100){
