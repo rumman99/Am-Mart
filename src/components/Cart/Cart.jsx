@@ -8,6 +8,7 @@ const Cart = (props) => {
     //     cartPrice+=perProduct;
     // }
     const cartPrice= cartItems.reduce((cartPrice, perProduct) => cartPrice+perProduct.price, 0)
+    // console.log(cartItems);
 
 let shipping= 0;
 if(cartPrice>100){
