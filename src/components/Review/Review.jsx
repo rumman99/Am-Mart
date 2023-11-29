@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { getDatabaseCart } from "../../utilities/databaseManager";
+import { getDatabaseCart, removeFromDatabaseCart } from "../../utilities/databaseManager";
 import fakeData from "../../fakeData";
-import Cart from "../Cart/Cart";
-import Product from "../Product/Product";
 import Revieworder from "../Revieworder/Revieworder";
 
 const Review = () => {
@@ -15,18 +13,23 @@ const Review = () => {
 
         const findProduct= productkey.map(keys => {
             const matchProduct= fakeData.find(pd => pd.key===keys);
-            matchProduct.quantity= saveOrder[keys];
+            matchProduct.quantity= saveOrder[keys]; //Added Value by asking key of an array
             return matchProduct;
         });
         setcartItem(findProduct);
     },[])
-    console.log(cartItem);
-    let counter=1;
+
+    const removeProduct= (pdkey)=>{
+        const removeFromCart= cartItem.filter(pd=> pd.key !== pdkey);
+        setcartItem(removeFromCart);
+        removeFromDatabaseCart(pdkey);
+    }
+
     return (
         <div>
             <h3>Product on Cart: {cartItem.length}</h3>
             
-            {cartItem.map(items=> <Revieworder reviewpd={items}></Revieworder>)}
+            {cartItem.map(items=> <Revieworder removeProduct={removeProduct} reviewpd={items}></Revieworder>)}
         </div>
     );
 };
