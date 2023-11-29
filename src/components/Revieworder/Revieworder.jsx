@@ -1,13 +1,14 @@
 
 
 const Revieworder = (props) => {
-    const {name, quantity}= props.reviewpd;
+    const {name, quantity, key}= props.reviewpd;
+    const removeProduct= props.removeProduct;
     return (
         <div>
             <h4 style={{color:'blue'}}>{name}</h4>
             <h4>Quentity: {quantity}</h4>
             <div className="product_right">
-            <button >Remove Product</button>
+            <button onClick={()=>removeProduct(key)}>Remove Product</button>
             </div>
         </div>
     );

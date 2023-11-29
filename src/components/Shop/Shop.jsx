@@ -20,7 +20,7 @@ const Shop = () => {
         document.getElementById('added').style.color='green';
         document.getElementById('total').style.color='red';
 
-        // Local Storage:
+        //Add Local Storage:
         const sameProductCount= addedProduct.filter(addpd=> addpd.key === pd.key);
         const counter= sameProductCount.length; 
         addToDatabaseCart(pd.key, counter);
