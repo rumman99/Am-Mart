@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getDatabaseCart, removeFromDatabaseCart } from "../../utilities/databaseManager";
 import fakeData from "../../fakeData";
 import Revieworder from "../Revieworder/Revieworder";
+import Cart from "../Cart/Cart";
+import { useNavigate } from "react-router-dom";
 
 const Review = () => {
     // get from Local Storage
@@ -10,7 +12,6 @@ const Review = () => {
     useEffect(()=>{
         const saveOrder= getDatabaseCart();
         const productkey= Object.keys(saveOrder)
-
         const findProduct= productkey.map(keys => {
             const matchProduct= fakeData.find(pd => pd.key===keys);
             matchProduct.quantity= saveOrder[keys]; //Added Value by asking key of an array
@@ -25,12 +26,30 @@ const Review = () => {
         removeFromDatabaseCart(pdkey);
     }
 
+    const goHome= useNavigate();
+//Product Quantity on Cart Show
+        const getFromDB= getDatabaseCart();
+        const productValues= Object.values(getFromDB);
+        const totalQuantaty= productValues.reduce((initialpd, addedpd)=>initialpd+addedpd,0);
+        // console.log(totalQuantaty);
+    
+
     return (
-        <div>
-            <h3>Product on Cart: {cartItem.length}</h3>
-            
-            {cartItem.map(items=> <Revieworder removeProduct={removeProduct} reviewpd={items}></Revieworder>)}
+        <>
+        <div className="shop">
+            <div className="shop_left">
+                <h3>Product on Cart: {totalQuantaty}</h3>
+                {cartItem.map(items=> <Revieworder key={items.key} removeProduct={removeProduct} reviewpd={items}></Revieworder>)}
+            </div>
+            <div className="shop_right">
+                <Cart cartState={cartItem}></Cart>
+            </div>
         </div>
+        <div style={{textAlign:'center'}}>
+        <button style={{padding: "10px", marginTop:'30px', color: "cyan" , fontSize: "15px"}} onClick={()=>goHome('/')}>Go Home</button>
+        </div>
+        
+        </>
     );
 };
 

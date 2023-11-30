@@ -1,29 +1,54 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import fakeData from '../../fakeData'
 import './shop.css'
 import Product from '../Product/Product';
 import Cart from '../Cart/Cart';
 import { Link } from 'react-router-dom';
-import { addToDatabaseCart } from '../../utilities/databaseManager';
+import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
 
 const Shop = () => {
 // Product State
     const first10= fakeData.slice(0,10);
     const [product, setProduct] = useState(first10)
 
+//Get From Database
+
+
 // Cart State
     const [cart, setCart] =useState([]);
+// Get From Database
+    useEffect(()=>{
+        const getProductDB= getDatabaseCart();
+        const productKey= Object.keys(getProductDB);
+        const allProduct= productKey.map(productKey => {
+            const matchProduct= fakeData.find(pd => pd.key === productKey);
+            matchProduct.quantity= getProductDB[productKey];
+            return matchProduct;
+        })
+        setCart(allProduct)
+    }, []);
 
     const addCartButton= (pd)=>{
-        let addedProduct = [...cart, pd]
-        setCart(addedProduct);
-        document.getElementById('added').style.color='green';
-        document.getElementById('total').style.color='red';
+        const addedProduct= cart.find(product => product.key === pd.key);
+        let count= 1;
+        let newCart;
+//Assign Quantity of Products
+        if(addedProduct){
+            count= addedProduct.quantity+1;
+            addedProduct.quantity= count;
+            const otherProduct= cart.filter(product => product.key !== pd.key);
+            newCart= [...otherProduct, addedProduct];
+            setCart(newCart)
+        }
+        else{
+            pd.quantity=count;
+            setCart([...cart, pd]);
+        }
+        // document.getElementById('added').style.color='green';
+        // document.getElementById('total').style.color='red';
 
         //Add Local Storage:
-        const sameProductCount= addedProduct.filter(addpd=> addpd.key === pd.key);
-        const counter= sameProductCount.length; 
-        addToDatabaseCart(pd.key, counter);
+        addToDatabaseCart(pd.key, count);
     }
 
     return (
@@ -33,7 +58,7 @@ const Shop = () => {
             </div>
             <div className='shop_right'>
             <Cart cartState={cart}></Cart>
-            <Link to='/order' state={cart}><button>Order</button></Link>
+            <Link className='product_right' to='/Review'><button>Review Order</button></Link>
             </div>
         </div>
     );

@@ -7,7 +7,10 @@ const Cart = (props) => {
     //     let perProduct=cartItems[i].price;
     //     cartPrice+=perProduct;
     // }
-    const cartPrice= cartItems.reduce((cartPrice, perProduct) => cartPrice+perProduct.price, 0)
+    const cartPrice= cartItems.reduce((cartPrice, perProduct) => cartPrice+perProduct.price*perProduct.quantity, 0);
+    
+    
+    // cartPrice*quantity;
     // console.log(cartItems);
 
 let shipping= 0;
@@ -31,9 +34,14 @@ const numberConvert= (string)=>{
     return convert;
 }
 
+// Product Quantity on Cart Show
+const allProduct= cartItems;
+const getQuantity= allProduct.map(pd=>pd.quantity);
+const quantitySum= getQuantity.reduce((initialpd, addedpd)=>initialpd+addedpd,0);
+
     return (
         <div>
-            <h4 id="added">Added Product: {cartItems.length}</h4>
+            <h4 id="added">Added Product: {quantitySum}</h4>
             <p>All Product Price: ${numberConvert(cartPrice)}</p>
             <p>Shipping Charge: ${shipping}</p>
             <p>Tax: ${numberConvert(tax)}</p>
