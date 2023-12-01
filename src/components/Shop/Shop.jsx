@@ -57,8 +57,13 @@ const Shop = () => {
             {product.map(allItem => <Product key={allItem.key} addCartButton={addCartButton} item={allItem} showCartButton={true}></Product>)}
             </div>
             <div className='shop_right'>
-            <Cart cartState={cart}></Cart>
-            <Link className='product_right' to='/Review'><button>Review Order</button></Link>
+            <Cart cartState={cart}>
+                <div>
+                <Link className='product_right' to='/Review'>
+                    <button style={{marginTop:'20px', padding:'20px'}}>Review Order</button>
+                </Link>
+                </div>
+            </Cart>
             </div>
         </div>
     );

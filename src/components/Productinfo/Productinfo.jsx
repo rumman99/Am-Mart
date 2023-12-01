@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import fakeData from "../../fakeData";
 import { useState } from "react";
 import Product from "../Product/Product";

@@ -1,5 +1,4 @@
 
-
 const Cart = (props) => {
     const cartItems= props.cartState;
     // let cartPrice=0;
@@ -46,6 +45,9 @@ const quantitySum= getQuantity.reduce((initialpd, addedpd)=>initialpd+addedpd,0)
             <p>Shipping Charge: ${shipping}</p>
             <p>Tax: ${numberConvert(tax)}</p>
             <strong id="total">Total Price: ${numberConvert(tax+shipping+cartPrice)}</strong>
+            {
+                props.children
+            }
         </div>
     );
 };
