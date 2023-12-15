@@ -27,7 +27,7 @@ const Review = () => {
         removeFromDatabaseCart(pdkey);
     }
 
-    const goHome= useNavigate();
+    const navigate= useNavigate();
 //Product Quantity on Cart Show
         const getFromDB= getDatabaseCart();
         const productValues= Object.values(getFromDB);
@@ -35,21 +35,19 @@ const Review = () => {
         // console.log(totalQuantaty);
 
 //For Gif show in Place Order//
-const [orderPlaced, setOrderPlaced]= useState(false);
-let seeGiffy;
-if(orderPlaced){
-    seeGiffy= <img style={{width:'50%', margin:'auto', display:'block'}} src={giffy} alt="" />
-}
+// const [orderPlaced, setOrderPlaced]= useState(false);
+// let seeGiffy;
+// if(orderPlaced){
+//     seeGiffy= <img style={{width:'50%', margin:'auto', display:'block'}} src={giffy} alt="" />
+// }
     const handlePlaceOrder=()=>{
-        setcartItem([]);
-        clearLocalShoppingCart();
-        setOrderPlaced(true);
+        clearLocalShoppingCart()
+        navigate('/confirm-order');
     }
     
 
     return (
         <>
-        { (orderPlaced && seeGiffy) ||
         <div className="shop">
             <div className="shop_left">
                 <h3>Product on Cart: {totalQuantaty}</h3>
@@ -58,14 +56,14 @@ if(orderPlaced){
             <div className="shop_right">
                 <Cart cartState={cartItem}>
                     <div className='product_right' style={{marginTop:'20px'}}>
-                    <Link to=''><button onClick={handlePlaceOrder} style={{padding:'20px'}}>Place Order</button></Link>
+                    <button onClick={handlePlaceOrder} style={{padding:'20px'}}>Place Order</button>
                     </div>
                 </Cart>
             </div>
         </div>
-        }
+
         <div style={{textAlign:'center'}}>
-        <button style={{padding: "10px", marginTop:'30px', color: "cyan" , fontSize: "15px"}} onClick={()=>goHome('/')}>Go Home</button>
+        <button style={{padding: "10px", marginTop:'30px', color: "cyan" , fontSize: "15px"}} onClick={()=>navigate('/')}>Order Place</button>
         </div>
         
         </>
