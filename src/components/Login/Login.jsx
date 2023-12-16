@@ -3,6 +3,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, createUserWithEm
 import { useContext, useState } from 'react';
 import { userContext } from "../../App";
 import firebaseConfig from '../../firebase_config';
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 
 const app = initializeApp(firebaseConfig); // Custom Firebase Config File //
@@ -64,6 +65,9 @@ function Login() {
 //////////////////////////////////////////////////////////////////////////////////////////////////
   const [user, setUser]=useState({isLogin:false, name:'', email:'', photo:'', password:'', userError:'', success:false}); 
   const [newUser, setNewUser]= useState(false); // new user Conditional state //
+  let location= useLocation();
+  let navigate = useNavigate();
+  let from = location.state?.from?.pathname || "/"; //Redirect after login //
 
 // Form Validation Condition //
   const handleLogin=(e)=>{
@@ -122,6 +126,7 @@ const handleSubmit= (event)=>{
     setUser(userField);
     console.log('your name', userCredential.user);
     setUserLogin(userField);
+    navigate(from, { replace: true });
   })
   .catch((error) => {
     // error handle //

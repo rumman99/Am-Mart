@@ -4,7 +4,6 @@ import fakeData from "../../fakeData";
 import Revieworder from "../Revieworder/Revieworder";
 import Cart from "../Cart/Cart";
 import { Link, useNavigate } from "react-router-dom";
-import giffy from '../../images/giphy.gif';
 
 const Review = () => {
     // get from Local Storage
@@ -34,12 +33,7 @@ const Review = () => {
         const totalQuantaty= productValues.reduce((initialpd, addedpd)=>initialpd+addedpd,0);
         // console.log(totalQuantaty);
 
-//For Gif show in Place Order//
-// const [orderPlaced, setOrderPlaced]= useState(false);
-// let seeGiffy;
-// if(orderPlaced){
-//     seeGiffy= <img style={{width:'50%', margin:'auto', display:'block'}} src={giffy} alt="" />
-// }
+
     const handlePlaceOrder=()=>{
         clearLocalShoppingCart()
         navigate('/confirm-order');

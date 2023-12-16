@@ -22,7 +22,11 @@ function App() {
     <Routes>
       <Route path='/' element={<Shop></Shop>}/>
       <Route path='/review' element={<Review></Review>}/>
-      <Route path='/inventory' element={<Inventory></Inventory>}/>
+      <Route path='/inventory' element=
+        {<PrivateRoute>
+          <Inventory></Inventory>
+          </PrivateRoute>}>
+      </Route>
       <Route path='/product/:productkey' element={<Productinfo></Productinfo>}/>
       <Route path='/confirm-order' element=
         {<PrivateRoute>
