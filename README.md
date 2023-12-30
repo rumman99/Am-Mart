@@ -1,5 +1,5 @@
-# Website Preview: https://ema-john-ca642.web.app
-# Website Preview: https://ema-john-ca642.firebaseapp.com
+# Website Preview: http://tinyurl.com/5h6sn5st
+# Website Preview: https://shorturl.at/yNOY0
 # Baper-Dokan
 Online Shop Concept.
 
