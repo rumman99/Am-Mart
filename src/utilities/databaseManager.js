@@ -12,7 +12,7 @@ const getUser = () => {
 
 const getDataKey = () => {
     const userId = getUser();
-    return `baperdokan/carts/${userId}`
+    return `Am-Mart/carts/${userId}`
 }
 
 // push to local storage: a temporary place for database
