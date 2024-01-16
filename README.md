@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 # Am-Mart
+=======
+# Website Preview: http://tinyurl.com/5h6sn5st
+# Website Preview: https://shorturl.at/yNOY0
+# Baper-Dokan
+>>>>>>> 2468c62f48752a168f7e0383df654fcaee24f6ed
 Online Shop Concept.
 
 
